@@ -1,0 +1,43 @@
+/* AppBar.module.css */
+
+.header {
+    background-color: #282c34;
+    padding: 1rem;
+    color: white;
+    width: 200px;
+    /* Устанавливаем ширину до 200px */
+    height: 100vh;
+    /* Растягиваем на всю высоту окна */
+    /* position: fixed; */
+    /* Фиксируем слева */
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    /* Располагаем элементы в столбик */
+    gap: 1rem;
+    /* Добавляем отступы между элементами */
+    /* align-items: flex-start; */
+    /* Выравниваем по левому краю */
+}
+
+.nav a {
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
+.nav a svg {
+    margin-right: 0.5rem;
+}
+
+.nav a.active {
+    font-weight: bold;
+    text-decoration: underline;
+    color: rgb(130, 227, 20);
+}
