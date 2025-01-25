@@ -1,3 +1,22 @@
 .activeLink {
     color: red;
 }
+
+.navigation {
+    display: flex;
+    gap: 20px;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    /* Светло-серый фон */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Тень */
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.link:hover {
+    color: blue;
+}

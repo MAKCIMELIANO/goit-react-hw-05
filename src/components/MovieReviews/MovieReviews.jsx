@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { API_TOKEN } from '../../api';
+import css from './MovieReviews.module.css';
 
 function MovieReviews() {
   const { movieId } = useParams();
@@ -24,19 +25,21 @@ function MovieReviews() {
   }, [movieId]);
 
   return (
-    <div>
-      <h2>Reviews</h2>
+    <div className={css.reviewsContainer}>
+      <h2 className={css.reviewsTitle}>Reviews</h2>
       {reviews.length > 0 ? (
-        <ul>
+        <ul className={css.reviewsList}>
           {reviews.map(review => (
-            <li key={review.id}>
-              <h3>{review.author}</h3>
-              <p>{review.content}</p>
+            <li key={review.id} className={css.reviewItem}>
+              <h3 className={css.reviewAuthor}>{review.author}</h3>
+              <p className={css.reviewContent}>{review.content}</p>
             </li>
           ))}
         </ul>
       ) : (
-        <p>No reviews available for this movie.</p>
+        <p className={css.noReviewsMessage}>
+          No reviews available for this movie.
+        </p>
       )}
     </div>
   );

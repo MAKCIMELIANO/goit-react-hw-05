@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import css from './MoviesPage.module.css';
 
 function MoviesPage() {
   const [query, setQuery] = useState(() => localStorage.getItem('query') || '');
@@ -66,24 +67,33 @@ function MoviesPage() {
   };
 
   return (
-    <div>
+    <div className={css.container}>
       <ToastContainer />
-      <h1>Search Movies</h1>
+      <h1 className={css.title}>Search Movies</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSearch}
       >
         {({ isSubmitting }) => (
-          <Form>
-            <Field type="text" name="query" placeholder="Enter movie name" />
-            <button type="submit" disabled={isSubmitting}>
+          <Form className={css.form}>
+            <Field
+              type="text"
+              name="query"
+              placeholder="Enter movie name"
+              className={css.input}
+            />
+            <button
+              className={css.button}
+              type="submit"
+              disabled={isSubmitting}
+            >
               Search
             </button>
             <ErrorMessage
               name="query"
               component="div"
-              style={{ color: 'red' }}
+              className={css.errorMessage}
             />
           </Form>
         )}

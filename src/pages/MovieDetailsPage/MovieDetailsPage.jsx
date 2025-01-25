@@ -4,6 +4,7 @@ import { useParams, Link, Route, Routes, useLocation } from 'react-router-dom';
 import MovieCast from '../../components/MovieCast/MovieCast';
 import MovieReviews from '../../components/MovieReviews/MovieReviews';
 import { API_TOKEN } from '../../api';
+import css from './MovieDetailsPage.module.css';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -32,28 +33,35 @@ function MovieDetailsPage() {
   }, [movieId]);
 
   return (
-    <div>
+    <div className={css.movieDetailsContainer}>
       {movie && (
         <>
-          <Link to={previousLocation}>Go back</Link>
-          <h1>{movie.title}</h1>
+          <Link to={previousLocation} className={css.goBackLink}>
+            Go back
+          </Link>
+          <h1 className={css.movieTitle}>{movie.title}</h1>
           <img
             src={`${IMAGE_BASE_URL}${movie.poster_path}`}
             alt={movie.title}
+            className={css.moviePoster}
           />
-          <p>{movie.overview}</p>
-          <Link
-            to={`/movies/${movieId}/cast`}
-            state={{ from: previousLocation }}
-          >
-            Cast
-          </Link>
-          <Link
-            to={`/movies/${movieId}/reviews`}
-            state={{ from: previousLocation }}
-          >
-            Reviews
-          </Link>
+          <p className={css.movieOverview}>{movie.overview}</p>
+          <div className={css.linksContainer}>
+            <Link
+              to={`/movies/${movieId}/cast`}
+              state={{ from: previousLocation }}
+              className={css.castLink}
+            >
+              Cast
+            </Link>
+            <Link
+              to={`/movies/${movieId}/reviews`}
+              state={{ from: previousLocation }}
+              className={css.reviewsLink}
+            >
+              Reviews
+            </Link>
+          </div>
           <Routes>
             <Route path="cast" element={<MovieCast />} />
             <Route path="reviews" element={<MovieReviews />} />

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { API_TOKEN } from '../../api';
+import css from './MovieCast.module.css';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -26,19 +27,19 @@ function MovieCast() {
   }, [movieId]);
 
   return (
-    <div>
-      <h2>Cast</h2>
-      <ul>
+    <div className={css.castContainer}>
+      <h2 className={css.castTitle}>Cast</h2>
+      <ul className={css.castList}>
         {cast.map(actor => (
-          <li key={actor.cast_id}>
+          <li key={actor.cast_id} className={css.castItem}>
             {actor.profile_path && (
               <img
                 src={`${IMAGE_BASE_URL}${actor.profile_path}`}
                 alt={actor.name}
-                style={{ width: '100px' }}
+                className={css.castImage}
               />
             )}
-            <p>
+            <p className={css.castInfo}>
               {actor.name} as {actor.character}
             </p>
           </li>
