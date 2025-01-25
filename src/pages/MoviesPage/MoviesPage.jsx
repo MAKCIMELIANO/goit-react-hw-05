@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import MovieList from '../../components/MovieList/MovieList';
 import { API_TOKEN } from '../../api';
@@ -9,11 +10,9 @@ import * as Yup from 'yup';
 import css from './MoviesPage.module.css';
 
 function MoviesPage() {
-  const [query, setQuery] = useState(() => localStorage.getItem('query') || '');
-  const [movies, setMovies] = useState(() => {
-    const savedMovies = localStorage.getItem('movies');
-    return savedMovies ? JSON.parse(savedMovies) : [];
-  });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query') ?? '';
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     if (query) {
@@ -44,11 +43,6 @@ function MoviesPage() {
     }
   }, [query]);
 
-  useEffect(() => {
-    localStorage.setItem('query', query);
-    localStorage.setItem('movies', JSON.stringify(movies));
-  }, [query, movies]);
-
   const initialValues = {
     query: query,
   };
@@ -62,7 +56,7 @@ function MoviesPage() {
     if (newQuery !== query) {
       setMovies([]);
     }
-    setQuery(newQuery);
+    setSearchParams({ query: newQuery });
     setSubmitting(false);
   };
 
